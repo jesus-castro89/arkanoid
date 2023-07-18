@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-8daa1a0e","path":"/","title":"","lang":"es-ES","frontmatter":{},"headers":[{"level":2,"title":"Proyecto de Arkanoid","slug":"proyecto-de-arkanoid","link":"#proyecto-de-arkanoid","children":[]}],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"index.md"}');export{e as data};

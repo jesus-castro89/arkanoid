@@ -32,3 +32,7 @@ audio/*.wav
 img/*.png
 img/*.gif
 fonts/*.ttf
+/.yarn/
+node_modules/
+.temp/
+.cache/

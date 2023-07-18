@@ -1,0 +1,11 @@
+{
+  "name": "arkanoid",
+  "packageManager": "yarn@3.6.1",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "vuepress": "next"
+  }
+}
