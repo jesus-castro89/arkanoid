@@ -29,5 +29,6 @@ bin/
 .DS_Store
 /.idea/
 audio/*.wav
-img/*.*
+img/*.png
+img/*.gif
 fonts/*.ttf
