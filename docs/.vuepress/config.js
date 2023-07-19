@@ -4,7 +4,7 @@ import { defaultTheme } from 'vuepress'
 export default defineUserConfig({
   base: '/arkanoid/',
   lang: 'es-ES',
-  title: 'Arkanoid :: UNITEC',
+  title: 'Arkanoid :: UNITEC ',
   description: 'Sitio para el proyecto Arkanoid Java de la asignatura, Programación Orientada a Objetos de la UNITEC',
   theme: defaultTheme({
       log: './img/educacion.png',
