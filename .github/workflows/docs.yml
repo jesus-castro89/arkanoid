@@ -33,10 +33,6 @@ jobs:
           # cache deps for pnpm
           cache: pnpm
 
-      # run build script
-      - name: Build VuePress site
-        run: pnpm docs:build
-
       # please check out the docs of the workflow for more details
       # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
