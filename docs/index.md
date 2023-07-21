@@ -1,3 +1,7 @@
+---
+home: true
+---
+
 # Inicio
 
 La presente guía acompaña al repositorio `arakanoid` que nos permitirá crear un clon

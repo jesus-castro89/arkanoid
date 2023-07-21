@@ -26,7 +26,7 @@ export default defineUserConfig({
         text: 'Parte 1: Demos Inicio',
         link: '/guia/inicio/README.md',
         children: [
-          '/guia/inicio/sprite.md'
+          '/guia/inicio/sprite.md', '/guia/inicio/interfaces.md', '/guia/inicio/graphics.md'
         ]
       }
     ]
