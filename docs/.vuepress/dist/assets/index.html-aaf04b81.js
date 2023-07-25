@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-8daa1a0e","path":"/","title":"Inicio","lang":"es-ES","frontmatter":{"home":true},"headers":[],"git":{"updatedTime":1689974931000,"contributors":[{"name":"Jesús Aurelio Castro Magaña","email":"jesus_castrom@my.unitec.edu.mx","commits":3}]},"filePathRelative":"index.md"}');export{e as data};

@@ -6,9 +6,11 @@ editLink: false
 
 # Iniciando el Proyecto
 
+::: warning Importante
 Para este primer apartado deberemos de descargar el contenido del repositorio, ya que este contiene el contenido de
-carpetas, clases e interfaces base <font color="red">**solo el esqueleto**</font>, es decir solo contaremos con las
-estructuras básicas que iremos llenando poco a poco en cada apartado de esta guía interactiva.
+carpetas, clases e interfaces base **solo el esqueleto**, es decir solo contaremos con las estructuras básicas que
+iremos llenando poco a poco en cada apartado de esta guía interactiva.
+:::
 
 Para poder descargar el contenido inicial, puedes acceder al siguiente
 enlace: [Versión 1.0.0](https://github.com/jesus-castro89/arkanoid/archive/refs/tags/v1.0.0.zip).

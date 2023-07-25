@@ -239,6 +239,7 @@ Junto a sus atributos, la clase requiere de las siguientes funciones:
 - Un constructor que coincida con la clase Sprite.
 
 Por lo que la clase quedaría de la siguiente manera:
+
 ```java
 package graphics.brick;
 

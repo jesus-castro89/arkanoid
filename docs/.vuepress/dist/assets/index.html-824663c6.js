@@ -1,1 +1,0 @@
-const a=JSON.parse('{"key":"v-14a53b10","path":"/guia/","title":"","lang":"es-ES","frontmatter":{},"headers":[],"git":{"updatedTime":1689911268000,"contributors":[{"name":"Jesús Aurelio Castro Magaña","email":"jesus_castrom@my.unitec.edu.mx","commits":2}]},"filePathRelative":"guia/README.md"}');export{a as data};

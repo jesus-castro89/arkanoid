@@ -9,7 +9,7 @@ export default defineUserConfig({
   head: [['link', { rel: 'icon', href: '/img/educacion.png' }]],
   editLink: false,
   theme: defaultTheme({
-    logo: './img/educacion.png',
+    logo: '/img/educacion.png',
     repo: 'https://github.com/jesus-castro89/arkanoid',
     navbar: [
       {
@@ -27,6 +27,14 @@ export default defineUserConfig({
         link: '/guia/inicio/README.md',
         children: [
           '/guia/inicio/sprite.md', '/guia/inicio/interfaces.md', '/guia/inicio/graphics.md'
+        ]
+      },
+      {
+        text: 'Parte 2: Bordes, Tipos Enumerados y Niveles',
+        link: '/guia/levels/README.md',
+        children: [
+          '/guia/levels/borders.md', '/guia/levels/bonus.md', '/guia/levels/brick.md', '/guia/levels/paddle.md',
+          '/guia/levels/level.md'
         ]
       }
     ]
