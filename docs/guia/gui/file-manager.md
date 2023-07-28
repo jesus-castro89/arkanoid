@@ -1,3 +1,14 @@
+---
+title: FileManager
+description: Definición de la clase encargada de gestionar los niveles
+editLink: false
+---
+
+# FileManager <Badge type="tip" text="Nuevo" vertical="middle" />
+
+Esta clase se encuentra en el paquete ui y tendrá la siguiente estructura:
+
+```java
 package util;
 
 import java.io.*;
@@ -98,3 +109,13 @@ public class FileManager {
         }
     }
 }
+```
+
+Como te darás cuenta, esta clase es muy similar a algo que ya hemos hecho en clase, recuerda que para que esto funcione
+deberás de modificar el nivel y todas las clases afectadas por este para que pueda ser serializado, es decir hacer que
+las siguientes clases Implementen Serializable:
+
+- Level
+- Sprite
+- BrickType
+- Brick

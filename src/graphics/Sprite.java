@@ -4,8 +4,9 @@ import util.Globals;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class Sprite {
+public class Sprite implements Serializable {
 
     protected int x;
     protected int y;
@@ -19,6 +20,17 @@ public class Sprite {
         this.x = x;
         this.y = y;
         getImageDimensions();
+    }
+
+    public void paint(Graphics2D g2d) {
+
+        g2d.drawImage(this.getImage(), this.getX(), this.getY(), null);
+        //Debug Collision Box
+        g2d.setColor(Color.RED);
+        g2d.drawRect((int) getRect().getX(),
+                (int) getRect().getY(),
+                (int) getRect().getWidth(),
+                (int) getRect().getHeight());
     }
 
     public Rectangle getRect() {

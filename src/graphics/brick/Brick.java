@@ -1,8 +1,11 @@
 package graphics.brick;
 
 import graphics.Sprite;
+import ui.GamePanel;
 
-public class Brick extends Sprite {
+import java.io.Serializable;
+
+public class Brick extends Sprite implements Serializable {
 
     private int minX;
     private int minY;
@@ -11,6 +14,7 @@ public class Brick extends Sprite {
     private int life;
     private int points;
     private boolean destroy;
+    private GamePanel gamePanel;
 
     public Brick(BrickType type, int x, int y) {
         super(type.getImageName(), x, y);
@@ -21,7 +25,6 @@ public class Brick extends Sprite {
         this.minY = (int) this.getRect().getMinY();
         this.maxX = (int) this.getRect().getMaxX();
         this.maxY = (int) this.getRect().getMaxY();
-
     }
 
     public void updateRect() {
@@ -41,6 +44,14 @@ public class Brick extends Sprite {
             this.setLife(0);
             this.setDestroy(true);
         }
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 
     public int getMinX() {

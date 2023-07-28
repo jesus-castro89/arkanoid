@@ -36,3 +36,4 @@ fonts/*.ttf
 node_modules/
 .temp/
 .cache/
+/levels/*.lvl

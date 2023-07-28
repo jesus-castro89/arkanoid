@@ -1,6 +1,7 @@
 package graphics.paddle;
 
 import graphics.Sprite;
+import ui.GamePanel;
 import util.Globals;
 import util.Moveable;
 
@@ -23,12 +24,14 @@ public class Paddle extends Sprite implements Moveable {
     private int endSecondBorder; //6
     private int lowPart; //7
     private boolean shootMode;
+    private GamePanel gamePanel;
 
-    public Paddle(PaddleType type, int x, int y) {
+    public Paddle(PaddleType type, int x, int y, GamePanel gamePanel) {
 
         super(type.getImageName(), x, y);
         this.xam = 0;
         changeType(type);
+        this.gamePanel=gamePanel;
     }
 
     @Override
@@ -63,6 +66,14 @@ public class Paddle extends Sprite implements Moveable {
 
         this.x = Globals.INIT_PADDLE_X;
         this.y = Globals.INET_PADDLE_Y;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 
     public int getXam() {
