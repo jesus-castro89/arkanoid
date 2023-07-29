@@ -17,7 +17,7 @@ package util;
 import graphics.brick.Brick;
 import graphics.brick.BrickType;
 
-public class Level implements Serializable {
+public class Level{
 
     private Brick[][] brickPad;
     private String background;

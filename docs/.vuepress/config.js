@@ -38,6 +38,15 @@ export default defineUserConfig({
           '/guia/levels/README.md', '/guia/levels/borders.md', '/guia/levels/bonus.md', '/guia/levels/brick.md',
           '/guia/levels/paddle.md', '/guia/levels/level.md'
         ]
+      },
+      {
+        text: 'Parte 3: Ventanas, Sprites y Niveles',
+        collapsible: true,
+        link: '/guia/gui/README.md',
+        children: [
+          '/guia/gui/README.md', '/guia/gui/main-window.md', '/guia/gui/game-panel.md', '/guia/gui/game-cycle.md',
+          '/guia/gui/level.md', '/guia/gui/file-manager.md'
+        ]
       }
     ]
   }),

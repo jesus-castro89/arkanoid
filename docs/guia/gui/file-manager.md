@@ -119,3 +119,12 @@ las siguientes clases Implementen Serializable:
 - Sprite
 - BrickType
 - Brick
+
+::: tip PROBAR LA VENTANA
+Si has seguido todos los pasos previos, te habrás percatado que ya modificamos todas esas clases, así que para probar la
+funcionalidad de la ventana, lo que debes hacer es ejecutar esta clase para que se genere de forma aleatoria la matriz
+de bloques de al menos un nivel.
+    
+Pero para que funcione correctamente también deberás de descargar el paquete de imágenes que puedes encontrar en BB en
+el apartado dedicado al proyecto.
+:::
