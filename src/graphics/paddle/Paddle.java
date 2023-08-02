@@ -1,11 +1,14 @@
 package graphics.paddle;
 
+import graphics.Laser;
 import graphics.Sprite;
 import ui.GamePanel;
 import util.Globals;
 import util.Moveable;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Paddle extends Sprite implements Moveable {
 
@@ -31,12 +34,52 @@ public class Paddle extends Sprite implements Moveable {
         super(type.getImageName(), x, y);
         this.xam = 0;
         changeType(type);
-        this.gamePanel=gamePanel;
+        this.gamePanel = gamePanel;
     }
 
     @Override
     public void move() {
 
+        //Desplazamiento esperado
+        x += xam;
+        //Dimensiones del Panel de juego
+        Dimension gameDimension = Globals.PANEL_DIMENSION;
+        //El punto máximo hacia la derecha para jugador
+        int maximum = (int) (gameDimension.getWidth() - 28) - imageWidth;
+        //Globals.BRICK_MARGIN es el punto mínimo para el jugador
+        if (x <= Globals.BRICK_MARGIN) x = Globals.BRICK_MARGIN;
+        if (x >= maximum) x = maximum;
+    }
+
+    public void keyPressed(KeyEvent e) {
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT -> xam = -1;
+            case KeyEvent.VK_RIGHT -> xam = 1;
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT -> xam = 0;
+            case KeyEvent.VK_SPACE -> {
+                if (/*isShootMode() && */gamePanel.getLasers().size() < 5) {
+
+                    makeLaser();
+                }
+            }
+            case KeyEvent.VK_NUMPAD1 -> changeType(PaddleType.NORMAL);
+            case KeyEvent.VK_NUMPAD2 -> changeType(PaddleType.LARGE);
+            case KeyEvent.VK_NUMPAD3 -> changeType(PaddleType.LASER);
+        }
+    }
+
+    private void makeLaser() {
+
+        int x = gamePanel.getPaddle().getX() + ((Globals.PADDLE_WIDTH / 2) - (Globals.LASER_WIDTH / 2));
+        int y = gamePanel.getPaddle().getY() - gamePanel.getPaddle().getImageHeight();
+        gamePanel.getLasers().add(new Laser(x, y, gamePanel));
     }
 
     public void changeType(PaddleType type) {

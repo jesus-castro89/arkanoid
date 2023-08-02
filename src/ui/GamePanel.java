@@ -1,6 +1,7 @@
 package ui;
 
 import events.GameCycle;
+import events.KeyboardAction;
 import graphics.Ball;
 import graphics.Laser;
 import graphics.bonus.Bonus;
@@ -60,6 +61,7 @@ public class GamePanel extends JPanel implements Moveable {
         this.loadLevel();
         timer = new Timer(Globals.PERIOD, new GameCycle(this));
         timer.start();
+        this.addKeyListener(new KeyboardAction(this));
         this.setFocusable(true);
         this.requestFocus();
     }
@@ -182,6 +184,216 @@ public class GamePanel extends JPanel implements Moveable {
 
     @Override
     public void move() {
+
+        for (Ball ball : balls) {
+
+            ball.move();
+        }
+        for (Laser laser : lasers) {
+
+            laser.move();
+        }
+        for (Bonus bonus : bonuses) {
+
+            bonus.move();
+        }
+        lasers.removeIf(b -> b.getY() <= 24);
+        lasers.removeIf(Laser::isDestroy);
+        bonuses.removeIf(b -> b.getY() >= Globals.BOTTOM_EDGE);
+        bonuses.removeIf(Bonus::isTaken);
+        paddle.move();
+    }
+
+    public void checkCollisions() {
+
+        Brick[][] bricks = this.currentLevel.getBrickPad();
+        checkBallCollisions(bricks);
+        checkBonusesCollision();
+        checkLaserCollisions(bricks);
+    }
+
+    private void checkBallCollisions(Brick[][] bricks) {
+
+        //Verificamos si la pelota golpea algún elemento
+        Brick actualBrick;
+        for (Ball actualBall : balls) {
+
+            if (actualBall.getRect().intersects(paddle.getRect()) && actualBall.getYam() != -1) {
+
+                paddleCollision(actualBall, paddle);
+            }
+            if ((actualBall.getRect()).intersects(leftBorder.getRect())) {
+
+                borderCollision(actualBall, leftBorder);
+            }
+            if ((actualBall.getRect()).intersects(topBorder.getRect())) {
+
+                borderCollision(actualBall, topBorder);
+            }
+            if ((actualBall.getRect()).intersects(rightBorder.getRect())) {
+
+                borderCollision(actualBall, this.rightBorder);
+            }
+            for (int row = 0; row < Globals.BRICKS_ROWS; row++) {
+                for (int column = 0; column < Globals.BRICK_COLUMNS; column++) {
+
+                    actualBrick = bricks[row][column];
+                    if (!actualBrick.isDestroy()
+                            && (actualBall.getRect()).intersects(actualBrick.getRect())) {
+
+                        brickCollision(actualBall, actualBrick);
+                    }
+                }
+            }
+            checkBottomCollision(actualBall);
+        }
+    }
+
+    private void checkBonusesCollision() {
+
+        //Verificamos sin el jugador toma un bonus
+        for (Bonus bonus : bonuses) {
+
+            if (getPaddle().getRect().intersects(bonus.getRect())) {
+
+                switch (bonus.getType()) {
+                    case ENLARGE -> this.getPaddle().changeType(PaddleType.LARGE);
+                    case SMALL -> this.getPaddle().changeType(PaddleType.NORMAL);
+                    case PLAYER -> {
+                        this.setLives(this.getLives() + 1);
+                    }
+                    case LASER -> {
+                        this.getPaddle().changeType(PaddleType.LASER);
+                        this.getPaddle().setShootMode(true);
+                    }
+                }
+                bonus.setTaken(true);
+            }
+        }
+    }
+
+    private void checkLaserCollisions(Brick[][] bricks) {
+
+        //Verificamos que si un laser colisiona con algun ladrillo
+        Brick actualBrick;
+        for (Laser laser : lasers) {
+            for (int row = 0; row < Globals.BRICKS_ROWS; row++) {
+                for (int column = 0; column < Globals.BRICK_COLUMNS; column++) {
+
+                    actualBrick = bricks[row][column];
+                    if (!actualBrick.isDestroy() && laser.getRect().intersects(actualBrick.getRect())) {
+
+                        actualBrick.minusLife();
+                        laser.setDestroy(true);
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkBottomCollision(Ball actualBall) {
+
+        if (actualBall.getRect().getMaxY() > Globals.BOTTOM_EDGE) {
+
+            if (balls.size() > 1) {
+
+                balls.remove(actualBall);
+            } else {
+
+                if (this.getLives() > 1) {
+
+                    this.setLives(this.getLives() - 1);
+                    actualBall.resetState();
+                    this.paddle.resetState();
+                    this.resetKeyboardActions();
+                } else {
+                    this.setLives(this.getLives() - 1);
+                    this.stopGame();
+                }
+            }
+        }
+    }
+
+    private void paddleCollision(Ball actualBall, Paddle paddle) {
+
+        int center = actualBall.getCenter();
+        if (actualBall.getY() + actualBall.getImageHeight() >= paddle.getY() &&
+                actualBall.getY() <= paddle.getY() + paddle.getImageHeight()) {
+
+            if (actualBall.getX() + actualBall.getImageWidth() >= paddle.getX() && center <= paddle.getEndFirstBorder()) {
+
+                Globals.bounce(actualBall, 1);
+            } else if (center >= paddle.getEndFirstBorder() && center <= paddle.getStartCenter()) {
+
+                Globals.bounce(actualBall, 2);
+            } else if (center >= paddle.getStartCenter() && center <= paddle.getEndCenter()) {
+
+                Globals.bounce(actualBall, 3);
+            } else if (center >= paddle.getEndCenter() && center <= paddle.getStartSecondBorder()) {
+
+                Globals.bounce(actualBall, 4);
+            } else if (center >= paddle.getStartSecondBorder() && actualBall.getX() <= paddle.getEndSecondBorder()) {
+
+                Globals.bounce(actualBall, 5);
+            }
+        }
+    }
+
+    private void borderCollision(Ball actualBall, Border border) {
+
+        double lowerEdge = Globals.distancia(actualBall, border.getMinX(), border.getMaxY(),
+                border.getMaxX(), border.getMaxY());
+        double leftEdge = Globals.distancia(actualBall, border.getMinX(), border.getMinY(),
+                border.getMinX(), border.getMaxY());
+        double rightEdge = Globals.distancia(actualBall, border.getMaxX(), border.getMinY(),
+                border.getMaxX(), border.getMaxY());
+        if (lowerEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 7);
+        }
+        if (leftEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 8);
+        }
+        if (rightEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 9);
+        }
+    }
+
+    private void brickCollision(Ball actualBall, Brick brick) {
+
+        double topEdge = Globals.distancia(actualBall, brick.getMinX(), brick.getMinY(),
+                brick.getMaxX(), brick.getMinY());
+        double lowerEdge = Globals.distancia(actualBall, brick.getMinX(), brick.getMaxY(),
+                brick.getMaxX(), brick.getMaxY());
+        double leftEdge = Globals.distancia(actualBall, brick.getMinX(), brick.getMinY(),
+                brick.getMinX(), brick.getMaxY());
+        double rightEdge = Globals.distancia(actualBall, brick.getMaxX(), brick.getMinY(),
+                brick.getMaxX(), brick.getMaxY());
+        boolean minus = false;
+        if (topEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 6);
+            minus = true;
+        }
+        if (lowerEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 7);
+            minus = true;
+        }
+        if (leftEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 8);
+            minus = true;
+        }
+        if (rightEdge <= actualBall.getMiddle()) {
+
+            Globals.bounce(actualBall, 9);
+            minus = true;
+        }
+        if (minus)
+            brick.minusLife();
     }
 
     public MainWindow getMainWindow() {

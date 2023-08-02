@@ -1,10 +1,12 @@
 package graphics;
 
+import ui.GamePanel;
 import util.Globals;
 import util.Moveable;
 
 public class Laser extends Sprite implements Moveable {
     private boolean destroy = false;
+    private GamePanel gamePanel;
 
     /**
      * Constructor de los objetos que recibe como parámetros, las coordenadas (x, y)
@@ -13,15 +15,16 @@ public class Laser extends Sprite implements Moveable {
      * @param x El valor de la coordenada x
      * @param y El valor de la coordenada y
      */
-    public Laser(int x, int y) {
+    public Laser(int x, int y, GamePanel gamePanel) {
 
         super(Globals.LASER_SPRITE, x, y);
+        this.gamePanel = gamePanel;
     }
 
     @Override
     public void move() {
 
-        this.setY(this.getY() - 5);
+        y -= 5;
     }
 
     public boolean isDestroy() {
@@ -30,5 +33,13 @@ public class Laser extends Sprite implements Moveable {
 
     public void setDestroy(boolean destroy) {
         this.destroy = destroy;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 }

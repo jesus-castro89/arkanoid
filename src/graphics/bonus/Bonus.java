@@ -20,6 +20,7 @@ public class Bonus extends Sprite implements Moveable {
     @Override
     public void move() {
 
+        y += yam;
     }
 
     public BonusType getType() {
