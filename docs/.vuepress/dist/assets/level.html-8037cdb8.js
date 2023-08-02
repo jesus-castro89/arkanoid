@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-13c10f65","path":"/guia/levels/level.html","title":"La clase Level","lang":"es-ES","frontmatter":{"title":"La clase Level","description":"Definición y aplicación de los niveles de Juego","editLink":false},"headers":[],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"guia/levels/level.md"}');export{e as data};

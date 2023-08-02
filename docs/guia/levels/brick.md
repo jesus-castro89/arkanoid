@@ -47,7 +47,9 @@ public enum BrickType {
 }
 ```
 
-En este ejemplo solo se agregaron dos tipos de bloques, pero tú deberás de agregar 5 más tipos a tu gusto.
+::: warning MÁS BLOQUES PARA LA ENTREGA FINAL
+En este ejemplo solo se agregaron dos tipos de bloques, pero tú deberás de agregar 5 o más tipos a tu gusto.
+:::
 
 ## Brick
 

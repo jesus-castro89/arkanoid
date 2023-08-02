@@ -59,6 +59,6 @@ public class MainWindow extends JFrame {
 ```
 
 ::: warning ERROR EN EL EDITOR
-Si el editor de código marca errores en las líneas de `GamePanel` y `MenuPanel`, descuida ahora haremos que desaparezcan
-al crear esas clases:
+Si el editor de código marca errores en las líneas de `GamePanel`, descuida ahora haremos que desaparezcan
+al crear esas clases.
 :::

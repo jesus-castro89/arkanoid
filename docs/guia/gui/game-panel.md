@@ -109,6 +109,8 @@ public class GamePanel extends JPanel implements Moveable {
         this.lasers = new Vector<>(5, 1);
         this.bonuses = new Vector<>(1, 1);
         this.loadLevel();
+        timer = new Timer(Globals.PERIOD, new GameCycle(this));
+        timer.start();
         this.setFocusable(true);
         this.requestFocus();
     }
@@ -242,7 +244,7 @@ Si te marca algún error, descuida, sigue leyendo y veras como resolver estos de
 Lo primero que haremos es modificar nuestros sprites para agregar la función paint de la siguiente manera:
 
 :::: code-group
-::: code-group-item ANTERIOR
+::: code-group-item Anterior
 
 ```java
 package graphics;
@@ -251,7 +253,6 @@ import util.Globals;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
 
 public class Sprite {
 
@@ -287,9 +288,9 @@ public class Sprite {
 ```
 
 :::
-::: code-group-item NUEVO
+::: code-group-item ACTUALIZADO
 
-```java{9,25-34}
+```java{7,9,25-34}
 package graphics;
 
 import util.Globals;
@@ -353,7 +354,7 @@ forma:
 ### Border <Badge type="warning" text="Modificado" vertical="middle" />
 
 :::: code-group
-::: code-group-item ANTERIOR
+::: code-group-item Anterior
 
 ```java
 package graphics.border;
@@ -379,9 +380,9 @@ public class Border extends Sprite {
 ```
 
 :::
-::: code-group-item NUEVO
+::: code-group-item ACTUALIZADO
 
-```java{4,12,22}
+```java{4,12,14,22}
 package graphics.border;
 
 import graphics.Sprite;
@@ -414,7 +415,7 @@ public class Border extends Sprite {
 ### Ball <Badge type="warning" text="Modificado" vertical="middle" />
 
 :::: code-group
-::: code-group-item ANTERIOR
+::: code-group-item Anterior
 
 ```java
 package graphics;
@@ -456,9 +457,9 @@ public class Ball extends Sprite implements Moveable {
 ```
 
 :::
-::: code-group-item NUEVO
+::: code-group-item ACTUALIZADO
 
-```java{3,13,22}
+```java{3,7,13,22}
 package graphics;
 
 import ui.GamePanel;
@@ -506,16 +507,14 @@ public class Ball extends Sprite implements Moveable {
 ### Brick <Badge type="warning" text="Modificado" vertical="middle" />
 
 :::: code-group
-::: code-group-item ANTERIOR
+::: code-group-item Anterior
 
 ```java
 package graphics.brick;
 
 import graphics.Sprite;
 
-import java.io.Serializable;
-
-public class Brick extends Sprite implements Serializable {
+public class Brick extends Sprite{
 
   private int minX;
   private int minY;
@@ -558,9 +557,9 @@ public class Brick extends Sprite implements Serializable {
 ```
 
 :::
-::: code-group-item NUEVO
+::: code-group-item ACTUALIZADO
 
-```java{4,17}
+```java{4,6,8,17}
 package graphics.brick;
 
 import graphics.Sprite;
@@ -617,7 +616,7 @@ public class Brick extends Sprite implements Serializable {
 ### Paddle <Badge type="warning" text="Modificado" vertical="middle" />
 
 :::: code-group
-::: code-group-item ANTERIOR
+::: code-group-item Anterior
 
 ```java
 package graphics.paddle;
@@ -690,9 +689,9 @@ public class Paddle extends Sprite implements Moveable {
 ```
 
 :::
-::: code-group-item NUEVO
+::: code-group-item ACTUALIZADO
 
-```java{4,27,34}
+```java{4,27,29,34}
 package graphics.paddle;
 
 import graphics.Sprite;
