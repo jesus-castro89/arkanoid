@@ -1,7 +1,10 @@
 package graphics.brick;
 
 import graphics.Sprite;
+import graphics.bonus.Bonus;
+import graphics.bonus.BonusType;
 import ui.GamePanel;
+import util.Globals;
 
 import java.io.Serializable;
 
@@ -43,6 +46,17 @@ public class Brick extends Sprite implements Serializable {
         } else if (this.getLife() > 0) {
             this.setLife(0);
             this.setDestroy(true);
+            //Agregamos el Bonus a la Pantalla
+            if (Globals.random(1, 10) >= 7) {
+
+                BonusType type = switch (Globals.random(1, 4)) {
+                    case 2 -> BonusType.ENLARGE;
+                    case 3 -> BonusType.SMALL;
+                    case 4 -> BonusType.PLAYER;
+                    default -> BonusType.LASER;
+                };
+                this.getGamePanel().getBonuses().add(new Bonus(type, getMinX(), getMaxY(), this.getGamePanel()));
+            }
         }
     }
 

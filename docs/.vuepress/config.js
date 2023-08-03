@@ -47,12 +47,17 @@ export default defineUserConfig({
           '/guia/gui/README.md', '/guia/gui/main-window.md', '/guia/gui/game-panel.md', '/guia/gui/game-cycle.md',
           '/guia/gui/level.md', '/guia/gui/file-manager.md'
         ]
+      },
+      {
+        text: 'Parte 4: Movimientos y Colisiones',
+        collapsible: true,
+        link: '/guia/move/README.md',
+        children: [
+          '/guia/move/README.md', '/guia/move/ball.md', '/guia/move/paddle.md', '/guia/move/laser.md',
+          '/guia/move/bonus.md', '/guia/move/keyboard.md'
+        ]
       }
     ]
   }),
-  markdown: {
-    extendMarkdown: md => {
-      md.use(require("markdown-it-footnote"));
-    }
-  },
+  markdown: {},
 })

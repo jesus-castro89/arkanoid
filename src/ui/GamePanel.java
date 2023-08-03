@@ -156,7 +156,7 @@ public class GamePanel extends JPanel implements Moveable {
                 this.loadLevel();
                 this.lasers.clear();
                 this.bonuses.clear();
-                this.balls = new Vector<Ball>(1, 1);
+                this.balls = new Vector<>(1, 1);
                 this.balls.add(new Ball(Globals.INIT_BALL_X, Globals.INIT_BALL_Y, this));
                 this.paddle.resetState();
             } else {
@@ -215,7 +215,6 @@ public class GamePanel extends JPanel implements Moveable {
     private void checkBallCollisions(Brick[][] bricks) {
 
         //Verificamos si la pelota golpea algún elemento
-        Brick actualBrick;
         for (Ball actualBall : balls) {
 
             if (actualBall.getRect().intersects(paddle.getRect()) && actualBall.getYam() != -1) {
@@ -237,7 +236,7 @@ public class GamePanel extends JPanel implements Moveable {
             for (int row = 0; row < Globals.BRICKS_ROWS; row++) {
                 for (int column = 0; column < Globals.BRICK_COLUMNS; column++) {
 
-                    actualBrick = bricks[row][column];
+                    Brick actualBrick = bricks[row][column];
                     if (!actualBrick.isDestroy()
                             && (actualBall.getRect()).intersects(actualBrick.getRect())) {
 
@@ -274,13 +273,12 @@ public class GamePanel extends JPanel implements Moveable {
 
     private void checkLaserCollisions(Brick[][] bricks) {
 
-        //Verificamos que si un laser colisiona con algun ladrillo
-        Brick actualBrick;
+        //Verificamos que si un laser colisiona con algún ladrillo
         for (Laser laser : lasers) {
             for (int row = 0; row < Globals.BRICKS_ROWS; row++) {
                 for (int column = 0; column < Globals.BRICK_COLUMNS; column++) {
 
-                    actualBrick = bricks[row][column];
+                    Brick actualBrick = bricks[row][column];
                     if (!actualBrick.isDestroy() && laser.getRect().intersects(actualBrick.getRect())) {
 
                         actualBrick.minusLife();
@@ -316,27 +314,21 @@ public class GamePanel extends JPanel implements Moveable {
 
     private void paddleCollision(Ball actualBall, Paddle paddle) {
 
-        int center = actualBall.getCenter();
-        if (actualBall.getY() + actualBall.getImageHeight() >= paddle.getY() &&
-                actualBall.getY() <= paddle.getY() + paddle.getImageHeight()) {
-
-            if (actualBall.getX() + actualBall.getImageWidth() >= paddle.getX() && center <= paddle.getEndFirstBorder()) {
-
+        int ballCenter = actualBall.getCenter();
+        int ballHeight = actualBall.getY() + actualBall.getImageHeight();
+        int ballWidth= actualBall.getX() + actualBall.getImageWidth();
+        int paddleHeight = paddle.getY() + paddle.getImageHeight();
+        if ((ballHeight >= paddle.getY()) && (actualBall.getY() <= paddleHeight))
+            if ((ballWidth >= paddle.getX()) && (ballCenter <= paddle.getEndFirstBorder()))
                 Globals.bounce(actualBall, 1);
-            } else if (center >= paddle.getEndFirstBorder() && center <= paddle.getStartCenter()) {
-
+            else if ((ballCenter >= paddle.getEndFirstBorder()) && (ballCenter <= paddle.getStartCenter()))
                 Globals.bounce(actualBall, 2);
-            } else if (center >= paddle.getStartCenter() && center <= paddle.getEndCenter()) {
-
+            else if ((ballCenter >= paddle.getStartCenter()) && (ballCenter <= paddle.getEndCenter()))
                 Globals.bounce(actualBall, 3);
-            } else if (center >= paddle.getEndCenter() && center <= paddle.getStartSecondBorder()) {
-
+            else if ((ballCenter >= paddle.getEndCenter()) && (ballCenter <= paddle.getStartSecondBorder()))
                 Globals.bounce(actualBall, 4);
-            } else if (center >= paddle.getStartSecondBorder() && actualBall.getX() <= paddle.getEndSecondBorder()) {
-
+            else if ((ballCenter >= paddle.getStartSecondBorder()) && (actualBall.getX() <= paddle.getEndSecondBorder()))
                 Globals.bounce(actualBall, 5);
-            }
-        }
     }
 
     private void borderCollision(Ball actualBall, Border border) {

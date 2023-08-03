@@ -37,21 +37,15 @@ public interface Globals {
 
     static double distancia(Ball ball, int AX, int AY, int BX, int BY) {
 
-        double distancia = 0;
         double centroX = ball.getRect().getCenterX();
         double centroY = ball.getRect().getCenterY();
         double v = Math.pow((BX - AX), 2) + Math.pow((BY - AY), 2);
         double u = (((centroX - AX) * (BX - AX)) + ((centroY - AY) * (BY - AY))) / v;
-        if (u >= 0 && u <= 1) {
-
-            distancia = (((BX - AX) * (centroY - AY)) - ((BY - AY) * (centroX - AX))) / (Math.sqrt(v));
-        } else if (u > 1) {
-
-            distancia = Math.sqrt((Math.pow(centroX - BX, 2)) + (Math.pow(centroY - BY, 2)));
-        } else if (u < 0) {
-
-            distancia = Math.sqrt((Math.pow(centroX - AX, 2)) + (Math.pow(centroY - AY, 2)));
-        }
+        double baseDistance = (((BX - AX) * (centroY - AY)) - ((BY - AY) * (centroX - AX)));
+        double distancia = 0;
+        if (u >= 0 && u <= 1) distancia = baseDistance / (Math.sqrt(v));
+        else if (u > 1) distancia = Math.sqrt((Math.pow(centroX - BX, 2)) + (Math.pow(centroY - BY, 2)));
+        else if (u < 0) distancia = Math.sqrt((Math.pow(centroX - AX, 2)) + (Math.pow(centroY - AY, 2)));
         return Math.abs(distancia);
     }
 
@@ -59,10 +53,7 @@ public interface Globals {
 
         switch (section) {
             case 1 -> {
-                if (ball.getXam() != 1) {
-
-                    ball.setXam(-1);
-                }
+                if (ball.getXam() != 1) ball.setXam(-1);
                 ball.setYam(-1);
             }
             case 2 -> {
@@ -70,12 +61,8 @@ public interface Globals {
                 ball.setYam(-1);
             }
             case 3 -> {
-                if (ball.getXam() <= 0) {
-
-                    ball.setXam(-1);
-                } else {
-                    ball.setXam(1);
-                }
+                if (ball.getXam() <= 0) ball.setXam(-1);
+                else ball.setXam(1);
                 ball.setYam(-1);
             }
             case 4 -> {
@@ -87,28 +74,16 @@ public interface Globals {
                 ball.setYam(-1);
             }
             case 6 -> {
-                if (ball.getYam() == 1) {
-
-                    ball.setYam(-1);
-                }
+                if (ball.getYam() == 1) ball.setYam(-1);
             }
             case 7 -> {
-                if (ball.getYam() == -1) {
-
-                    ball.setYam(1);
-                }
+                if (ball.getYam() == -1) ball.setYam(1);
             }
             case 8 -> {
-                if (ball.getXam() == 0 || ball.getXam() == 1) {
-
-                    ball.setXam(-1);
-                }
+                if ((ball.getXam() == 0) || (ball.getXam() == 1)) ball.setXam(-1);
             }
             case 9 -> {
-                if (ball.getXam() == 0 || ball.getXam() == -1) {
-
-                    ball.setXam(1);
-                }
+                if ((ball.getXam() == 0) || (ball.getXam() == -1)) ball.setXam(1);
             }
         }
     }

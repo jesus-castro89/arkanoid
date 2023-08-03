@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-a84cc2ec","path":"/guia/gui/game-cycle.html","title":"GameCycle","lang":"es-ES","frontmatter":{"title":"GameCycle","description":"Clase que permite controlar el tiempo de juego.","editLink":false},"headers":[],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"guia/gui/game-cycle.md"}');export{e as data};
