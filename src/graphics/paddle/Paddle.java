@@ -64,14 +64,11 @@ public class Paddle extends Sprite implements Moveable {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT -> xam = 0;
             case KeyEvent.VK_SPACE -> {
-                if (/*isShootMode() && */gamePanel.getLasers().size() < 5) {
+                if (isShootMode() && gamePanel.getLasers().size() < 5) {
 
                     makeLaser();
                 }
             }
-            case KeyEvent.VK_NUMPAD1 -> changeType(PaddleType.NORMAL);
-            case KeyEvent.VK_NUMPAD2 -> changeType(PaddleType.LARGE);
-            case KeyEvent.VK_NUMPAD3 -> changeType(PaddleType.LASER);
         }
     }
 

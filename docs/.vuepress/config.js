@@ -56,6 +56,15 @@ export default defineUserConfig({
           '/guia/move/README.md', '/guia/move/ball.md', '/guia/move/paddle.md', '/guia/move/laser.md',
           '/guia/move/bonus.md', '/guia/move/keyboard.md'
         ]
+      },
+      {
+        text: 'Parte 5: Reproductor y acciones finales',
+        collapsible: true,
+        link: '/guia/sonido/README.md',
+        children: [
+          '/guia/sonido/README.md', '/guia/sonido/audio_player.md', '/guia/sonido/main_window.md',
+          '/guia/sonido/game_panel.md', '/guia/sonido/brick.md'
+        ]
       }
     ]
   }),

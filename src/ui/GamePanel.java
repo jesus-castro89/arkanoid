@@ -10,10 +10,7 @@ import graphics.border.BorderType;
 import graphics.brick.Brick;
 import graphics.paddle.Paddle;
 import graphics.paddle.PaddleType;
-import util.FileManager;
-import util.Globals;
-import util.Level;
-import util.Moveable;
+import util.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +37,7 @@ public class GamePanel extends JPanel implements Moveable {
     private int score;
     private Vector<Laser> lasers;
     private Vector<Bonus> bonuses;
+    private AudioPlayer audioPlayer;
 
     public GamePanel(MainWindow mainWindow) {
 
@@ -58,6 +56,7 @@ public class GamePanel extends JPanel implements Moveable {
         this.lives = Globals.START_LIVES;
         this.lasers = new Vector<>(5, 1);
         this.bonuses = new Vector<>(1, 1);
+        this.audioPlayer = new AudioPlayer("audio/level1.wav");
         this.loadLevel();
         timer = new Timer(Globals.PERIOD, new GameCycle(this));
         timer.start();
@@ -69,8 +68,10 @@ public class GamePanel extends JPanel implements Moveable {
     private void loadLevel() {
 
         FileManager fileManager = new FileManager();
-        this.currentLevel = fileManager.readLevel(this.level);
-        this.currentLevel.setGamePanel(this);
+        currentLevel = fileManager.readLevel(level);
+        currentLevel.setGamePanel(this);
+        audioPlayer.stop();
+        audioPlayer.start("audio/" + currentLevel.getAudio());
     }
 
     //Esta función permite detener el juego
@@ -78,6 +79,7 @@ public class GamePanel extends JPanel implements Moveable {
 
         this.inGame = false;
         timer.stop();
+        audioPlayer.stop();
     }
 
     //Esta función permite reanudar el juego
@@ -85,6 +87,7 @@ public class GamePanel extends JPanel implements Moveable {
 
         this.inGame = true;
         timer.start();
+        audioPlayer.resume();
         this.requestFocus();
     }
 
@@ -170,7 +173,7 @@ public class GamePanel extends JPanel implements Moveable {
         Font font;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT,
-                    new File("fonts\\game_over.ttf")).deriveFont(50f);
+                    new File("fonts\\game.ttf")).deriveFont(50f);
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -256,14 +259,16 @@ public class GamePanel extends JPanel implements Moveable {
             if (getPaddle().getRect().intersects(bonus.getRect())) {
 
                 switch (bonus.getType()) {
-                    case ENLARGE -> this.getPaddle().changeType(PaddleType.LARGE);
-                    case SMALL -> this.getPaddle().changeType(PaddleType.NORMAL);
+                    case ENLARGE -> getPaddle().changeType(PaddleType.LARGE);
+                    case SMALL -> getPaddle().changeType(PaddleType.NORMAL);
                     case PLAYER -> {
-                        this.setLives(this.getLives() + 1);
+                        setLives(getLives() + 1);
+                        int lives = Integer.parseInt(getMainWindow().getLivesCountLabel().getText());
+                        getMainWindow().getLivesCountLabel().setText("%d".formatted(++lives));
                     }
                     case LASER -> {
-                        this.getPaddle().changeType(PaddleType.LASER);
-                        this.getPaddle().setShootMode(true);
+                        getPaddle().changeType(PaddleType.LASER);
+                        getPaddle().setShootMode(true);
                     }
                 }
                 bonus.setTaken(true);
@@ -297,7 +302,8 @@ public class GamePanel extends JPanel implements Moveable {
 
                 balls.remove(actualBall);
             } else {
-
+                int lives = Integer.parseInt(getMainWindow().getLivesCountLabel().getText());
+                getMainWindow().getLivesCountLabel().setText("%d".formatted(--lives));
                 if (this.getLives() > 1) {
 
                     this.setLives(this.getLives() - 1);
@@ -316,7 +322,7 @@ public class GamePanel extends JPanel implements Moveable {
 
         int ballCenter = actualBall.getCenter();
         int ballHeight = actualBall.getY() + actualBall.getImageHeight();
-        int ballWidth= actualBall.getX() + actualBall.getImageWidth();
+        int ballWidth = actualBall.getX() + actualBall.getImageWidth();
         int paddleHeight = paddle.getY() + paddle.getImageHeight();
         if ((ballHeight >= paddle.getY()) && (actualBall.getY() <= paddleHeight))
             if ((ballWidth >= paddle.getX()) && (ballCenter <= paddle.getEndFirstBorder()))
@@ -498,5 +504,13 @@ public class GamePanel extends JPanel implements Moveable {
 
     public void setBonuses(Vector<Bonus> bonuses) {
         this.bonuses = bonuses;
+    }
+
+    public AudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
+
+    public void setAudioPlayer(AudioPlayer audioPlayer) {
+        this.audioPlayer = audioPlayer;
     }
 }

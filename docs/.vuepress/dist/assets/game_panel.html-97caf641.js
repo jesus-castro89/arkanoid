@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-837092b6","path":"/guia/sonido/game_panel.html","title":"Actualizando GamePanel","lang":"es-ES","frontmatter":{"title":"Actualizando GamePanel","description":"Actualización de la lógica principal del juego","editLink":false},"headers":[],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"guia/sonido/game_panel.md"}');export{a as data};

@@ -46,6 +46,9 @@ public class Brick extends Sprite implements Serializable {
         } else if (this.getLife() > 0) {
             this.setLife(0);
             this.setDestroy(true);
+            //Añadimos el puntaje al tablero
+            int score = Integer.parseInt(gamePanel.getMainWindow().getScoreCountLabel().getText());
+            gamePanel.getMainWindow().getScoreCountLabel().setText("%d".formatted((score + getPoints())));
             //Agregamos el Bonus a la Pantalla
             if (Globals.random(1, 10) >= 7) {
 

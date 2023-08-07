@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-303204dc","path":"/guia/move/laser.html","title":"Actualizando Laser","lang":"es-ES","frontmatter":{"title":"Actualizando Laser","description":"Agregando el panel al laser y modificando su comportamiento.","editLink":false},"headers":[],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"guia/move/laser.md"}');export{e as data};

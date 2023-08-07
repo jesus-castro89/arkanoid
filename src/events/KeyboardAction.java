@@ -39,5 +39,10 @@ public class KeyboardAction extends KeyAdapter {
             }
         }
         this.gamePanel.getPaddle().keyReleased(e);
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            gamePanel.getMainWindow().switchButtons();
+            if (gamePanel.isInGame()) gamePanel.stopGame();
+            else gamePanel.playGame();
+        }
     }
 }

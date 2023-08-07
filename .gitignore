@@ -37,3 +37,7 @@ node_modules/
 .temp/
 .cache/
 /levels/*.lvl
+/img/icons/life-count.png
+/img/icons/play.png
+/img/icons/score.png
+/img/icons/stop.png

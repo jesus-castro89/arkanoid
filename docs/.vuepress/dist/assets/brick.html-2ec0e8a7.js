@@ -1,0 +1,1 @@
+const i=JSON.parse('{"key":"v-eeff0f16","path":"/guia/sonido/brick.html","title":"Actualizando Brick","lang":"es-ES","frontmatter":{"title":"Actualizando Brick","description":"Actualización de Brick para registro de puntos","editLink":false},"headers":[],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"guia/sonido/brick.md"}');export{i as data};

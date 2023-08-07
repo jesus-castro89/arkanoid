@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="383" height="400"/>
+      <xy x="20" y="20" width="684" height="644"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -29,12 +29,15 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="d7e2a" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="d7e2a" class="javax.swing.JButton" binding="playButton">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <enabled value="false"/>
+              <hideActionText value="false"/>
+              <icon value="icons/play.png"/>
+              <text value="Reanudar"/>
             </properties>
           </component>
           <vspacer id="41d65">
@@ -42,44 +45,47 @@
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
-          <component id="1b8f1" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="1b8f1" class="javax.swing.JButton" binding="stopButton">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <icon value="icons/stop.png"/>
+              <text value="Detener"/>
             </properties>
           </component>
           <component id="96faa" class="javax.swing.JLabel">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <icon value="icons/life-count.png"/>
+              <text value="Vidas: "/>
             </properties>
           </component>
-          <component id="70c22" class="javax.swing.JLabel">
+          <component id="70c22" class="javax.swing.JLabel" binding="livesCountLabel">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="3"/>
             </properties>
           </component>
           <component id="6c59c" class="javax.swing.JLabel">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <icon value="icons/score.png"/>
+              <text value="Puntos: "/>
             </properties>
           </component>
-          <component id="66536" class="javax.swing.JLabel">
+          <component id="66536" class="javax.swing.JLabel" binding="scoreCountLabel">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="0"/>
             </properties>
           </component>
         </children>
